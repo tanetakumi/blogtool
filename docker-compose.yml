@@ -1,0 +1,12 @@
+version: '3'
+services:
+  pyjosim:
+    build: ./blogtool
+    container_name: blogtool
+    volumes:
+      - ./pyjosim/netlist:/root/netlist
+    environment:
+      - HOGE=$HOGE
+    # コンテナ内で開発するから落とさない
+    tty: true
+    stdin_open: true

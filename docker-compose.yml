@@ -1,12 +1,13 @@
 version: '3'
 services:
-  pyjosim:
+  blogtool:
     build: ./blogtool
     container_name: blogtool
-    volumes:
-      - ./pyjosim/netlist:/root/netlist
     environment:
-      - HOGE=$HOGE
-    # コンテナ内で開発するから落とさない
+      - GIT_USER=$GIT_USER
+      - GIT_EMAIL=$GIT_EMAIL
+      
+    # tty container -> host    output
+    # stdin_opne host -> container    input
     tty: true
     stdin_open: true

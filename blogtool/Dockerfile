@@ -1,16 +1,19 @@
-FROM node:14-buster-slim
+FROM node:16-slim
 ENV SHELL /bin/bash
 
 LABEL maintainer="tanetakumi"
 
-WORKDIR /code
+WORKDIR /root
 
 # set -ex コマンドの実行に失敗したらその場で終了する
-# josim installation
 RUN set -ex\
-    && pip install cmake\
-    && git clone "https://github.com/JoeyDelp/JoSIM"\
-    && cd JoSIM && mkdir build && cd build\
-    && cmake ..\
-    && cmake --build . --config Release\
-    && make install
+    && apt update\
+    && apt -y install git\
+    && git config user.name ${GIT_USERNAME}\
+    && git config user.name ${GIT_EMAIL}
+
+# set -ex コマンドの実行に失敗したらその場で終了する
+RUN set -ex\
+    && git clone "https://github.com/tanetakumi/taneblog"\
+    && cd taneblog\
+    && npm install
